@@ -18,6 +18,7 @@ public class UserController {
     @Operation(summary = "Pozdrav od servisa", description = "Vraca poruku pozdrava od user-service-a")
     public ResponseEntity<String> helloFromService() {
         // Vraca odgovor "Hello from user-service!"
+        System.out.println("Hello from user-service!");
         return ResponseEntity.ok("Hello from user-service!");
     }
 
