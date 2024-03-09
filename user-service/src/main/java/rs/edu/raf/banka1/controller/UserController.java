@@ -17,6 +17,7 @@ public class UserController {
     @GetMapping(produces = MediaType.TEXT_PLAIN_VALUE)
     @Operation(summary = "Pozdrav od servisa", description = "Vraca poruku pozdrava od user-service-a")
     public ResponseEntity<String> helloFromService() {
+        // Vraca odgovor "Hello from user-service!"
         return ResponseEntity.ok("Hello from user-service!");
     }
 
