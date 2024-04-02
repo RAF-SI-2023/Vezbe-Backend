@@ -219,13 +219,18 @@ public class UserServiceUnitTests {
 
         // KORAK 2: Mockujemo metode koje rade sa eksternim servisima, npr. bazom podataka.
         // VAZNA NAPOMENA: Za void metode se koristi doNothing() iz Mockito biblioteke kao na nacin prikazan ispod.
+        given(userRepository.findUserByUsername(user.getUsername())).willReturn(Optional.of(user));
         doNothing().when(userRepository).delete(user);
 
-        // KORAK 3: Pozivamo metodu koju zelimo da testiramo.
-        UserDto dto = userService.deleteUser(user);
+        try {
+            // KORAK 3: Pozivamo metodu koju zelimo da testiramo.
+            UserDto dto = userService.deleteUser(user.getUsername());
 
-        // KORAK 4: Proveramo da li smo dobili ocekivani rezultat.
-        assertEquals(dto.getUsername(), user.getUsername());
+            // KORAK 4: Proveramo da li smo dobili ocekivani rezultat.
+            assertEquals(dto.getUsername(), user.getUsername());
+        } catch (Exception e) {
+            fail(e.getMessage());
+        }
     }
 
     @Test

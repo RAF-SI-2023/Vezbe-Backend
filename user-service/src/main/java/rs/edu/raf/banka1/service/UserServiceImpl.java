@@ -84,10 +84,15 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDto deleteUser(User user) {
-        userRepository.delete(user);
+    public UserDto deleteUser(String username) throws Exception {
+        Optional<User> userOpt = userRepository.findUserByUsername(username);
+        if (userOpt.isEmpty()) {
+            throw new Exception("user does not exist");
+        }
 
-        return convertUserToDto(user);
+        userRepository.delete(userOpt.get());
+
+        return convertUserToDto(userOpt.get());
     }
 
     @Override

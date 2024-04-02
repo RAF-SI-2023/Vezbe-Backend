@@ -12,7 +12,7 @@ public interface UserService {
     List<UserDto> listUsers();
     UserDto createUser(UserCreateForm userCreateForm) throws Exception;
     UserDto editUser(UserCreateForm userCreateForm) throws Exception;
-    UserDto deleteUser(User user);
+    UserDto deleteUser(String username) throws Exception;
     boolean isAdmin(String username) throws Exception;
 
 }
