@@ -1,6 +1,5 @@
 # Vezbe Backend
 
-
 Primer projekta rađen na vežbama iz Softverskog inženjerstva.
 
 Projekat od prošle godine je dostupan u [RAF-SI-2022 organizaciji](https://github.com/RAF-SI-2022/Vezbe-Backend).
