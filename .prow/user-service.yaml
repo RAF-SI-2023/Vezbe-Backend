@@ -17,6 +17,9 @@ presubmits:
               start-docker.sh
 
               # PROMENITI PRI KOPIRANJU
+              SERVICE_NAME="user-service"
+
+              # PROMENITI PRI KOPIRANJU
               # Ovde treba do pokrenete sve mikroservise i dependencies koji vam trebaju
               # za integracione i end to end testove.
               # Primeri komandi (odkomentirasti neku komandu ili dodati neku svoju):
