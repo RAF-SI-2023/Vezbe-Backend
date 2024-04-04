@@ -73,7 +73,7 @@ public class UserControllerTestsSteps extends UserControllerTestsConfig {
 
             String jsonUserDto = mvcResult.getResponse().getContentAsString();
             UserDto userDto = objectMapper.readValue(jsonUserDto, UserDto.class);
-            assertEquals(userDto.getUsername(), userCreateForm.getUsername());
+            assertEquals(userDto.getUsername(), "userCreateForm.getUsername()");
         } catch (Exception e) {
             fail(e.getMessage());
         }
