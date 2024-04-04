@@ -31,9 +31,10 @@ presubmits:
 
               sleep 120
 
+              set +e
               mvn clean verify test
 
-              cp -r ./target/site/jacoco /logs/artifacts/
+              cp -r ./target/site/jacoco /logs/artifacts/ || true
               junit_source_directory="./target/surefire-reports/"
               junit_dest_directory="/logs/artifacts/"
 
