@@ -5,6 +5,7 @@ postsubmits:
   - name: post-vezbe-backend-build
     always_run: true
     decorate: true
+    max_concurrency: 1
     labels:
       preset-harbor-robot-push: "true"
     spec:
