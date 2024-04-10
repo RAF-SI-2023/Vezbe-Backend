@@ -3,7 +3,8 @@ presubmits:
   # Name treba da bude u formatu "pull-<tim>-<naziv-servisa>-test", npr.
   # pull-banka-1-user-service-test
   - name: pull-vezbe-backend-user-service-test
-    always_run: true
+    #always_run: true
+    run_if_changed: "(user-service/|docker-compose.yml|pom.xml|.prow/)"
     decorate: true
     spec:
       containers:
@@ -13,6 +14,21 @@ presubmits:
             - -c
             - |
               set -euo pipefail
+
+              collectJUnitCoverage() {
+                junit_source_directory="./target/surefire-reports/"
+                junit_dest_directory="/logs/artifacts/"
+
+                counter=1
+
+                for file in "$junit_source_directory"/*.xml; do
+                  cp "$file" "$junit_dest_directory/junit.$counter.xml"
+                  ((counter++))
+                done
+                
+                cp -r ./target/site/jacoco /logs/artifacts/
+                echo "${GCSWEB_URL}/prow-logs/pr-logs/pull/${REPO_OWNER}_${REPO_NAME}/${PULL_NUMBER}/${JOB_NAME}/${BUILD_NUMBER}/artifacts/jacoco/index.html" > /logs/artifacts/coverage.link.txt
+              }
 
               start-docker.sh
 
@@ -31,20 +47,8 @@ presubmits:
 
               sleep 120
 
+              trap collectJUnitCoverage EXIT
               mvn clean verify test
-
-              cp -r ./target/site/jacoco /logs/artifacts/
-              junit_source_directory="./target/surefire-reports/"
-              junit_dest_directory="/logs/artifacts/"
-
-              counter=1
-
-              for file in "$junit_source_directory"/*.xml; do
-                cp "$file" "$junit_dest_directory/junit.$counter.xml"
-                ((counter++))
-              done
-              
-              echo "${GCSWEB_URL}/prow-logs/pr-logs/pull/${REPO_OWNER}_${REPO_NAME}/${PULL_NUMBER}/${JOB_NAME}/${BUILD_NUMBER}/artifacts/jacoco/index.html" > /logs/artifacts/coverage.link.txt
           securityContext:
             privileged: true
           imagePullPolicy: Always
