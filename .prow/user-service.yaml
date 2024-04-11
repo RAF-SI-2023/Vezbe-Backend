@@ -100,8 +100,16 @@ presubmits:
               SERVICE_NAME="user-service"
               cd "$SERVICE_NAME"
 
-              # trap komanda 
+              # trap komanda obezbeđuje da se "collectJUnitCoverage"
+              # funkcija izvrši pre samog izlaska iz ove skripte, nezavisno
+              # od toga da li su testovi prošli uspešno ili neuspšeno.
+              # Ovo je izuzetno važno kako bi uploadovoali JUnit report nezavisno
+              # od toga da li su testovi prošli ili ne, pošto čak i da nisu,
+              # JUnit pokazuje koji testovi su prošli, a koji nisu.
+              # Takođe je izuzetno važno da se ova trap komnda pokrene pre
+              # pokretanja testova.
               trap collectJUnitCoverage EXIT
+
               # Pokreće sledeće Maven target-e:
               #   - "clean": čisti projekat, npr. ukoliko ste greškom commit-ovali target/ direktorijum
               #   - "test": pokreće sve testove u okviru vaših projekata
