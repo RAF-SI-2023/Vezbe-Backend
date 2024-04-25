@@ -14,5 +14,14 @@ services:
     volumes:
       - mysql-user:/var/lib/mysql
 
+  # Redis kontejner.
+  # Namerno nemamo volume za Redis zato sto nam je cilj da se kes memorija
+  # isprazni pri gasenju i/ili brisanja kontejnera.
+  redis:
+    image: redis:7.2.4-alpine
+    restart: always
+    ports:
+      - "6379:6379"
+
 volumes:
   mysql-user:

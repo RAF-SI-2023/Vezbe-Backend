@@ -127,6 +127,12 @@
 			<scope>test</scope>
 		</dependency>
 
+		<!-- Redis - koristi se za kesiranje -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-redis</artifactId>
+		</dependency>
+
 		<!-- Ostali dependency-i -->
 		<dependency>
 			<groupId>io.jsonwebtoken</groupId>
