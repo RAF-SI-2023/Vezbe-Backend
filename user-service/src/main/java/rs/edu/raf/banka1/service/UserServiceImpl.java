@@ -44,6 +44,10 @@ import java.util.stream.Collectors;
 //             (koristi se samo za kesiranje konkretnog objekta, tj. ne koristi se kada se kesiraju liste)
 // Strogo se preporucuje da se liste i klase cuvaju sa razlicitim value parametrima. Pogledati listUsers i getUser
 // metode kao primer.
+//
+// Za radoznale, preporucujem sledeci link koji opisuje neke od problema koji se mogu javiti prilikom kesiranja:
+// https://www.linkedin.com/posts/alexxubyte_systemdesign-coding-interviewtips-activity-7148716168403439616-Krf7/
+// Ovo je poprilicno van onoga sto se od vas trazi, ali moze vam pomoci ako budete nekada radili kesiranje.
 
 @Service
 public class UserServiceImpl implements UserService {
